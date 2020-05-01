@@ -43,7 +43,7 @@
                 <Font size="21.0" />
             </font>
         </Text>
-        <Text layoutX="108.0" layoutY="130.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Søg efter patient" />
+        <Text layoutX="108.0" layoutY="130.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Indtast Cpr" />
         <Separator layoutX="72.0" layoutY="263.0" prefHeight="13.0" prefWidth="566.0" />
         <Text fill="#726969" layoutX="300.0" layoutY="296.0" strokeType="OUTSIDE" strokeWidth="0.0" text="MÅLINGER" wrappingWidth="110.22704976797104">
             <font>
@@ -67,7 +67,6 @@
             </items>
         </SplitMenuButton>
         <Button fx:id="run" layoutX="22.0" layoutY="425.0" mnemonicParsing="false" onAction="#temp" prefHeight="36.0" prefWidth="79.0" text="Run" />
-      <Button fx:id="søg" layoutX="250.0" layoutY="150.0" mnemonicParsing="false" text="Søg" />
       <TextField fx:id="cpr" layoutX="75.0" layoutY="150.0" promptText="cpr-nummer" />
       <Button fx:id="loader" layoutX="623.0" layoutY="425.0" mnemonicParsing="false" onAction="#next" text="Next" />
       <TextArea fx:id="dataOutput" layoutX="23.0" layoutY="312.0" prefHeight="108.0" prefWidth="647.0" />
