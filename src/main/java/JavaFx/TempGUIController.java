@@ -11,7 +11,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
@@ -20,11 +20,11 @@ import java.io.IOException;
 public class TempGUIController implements TempListener {
 
     public TempDAO tempDAO = new TempDAOImpl();
-    public Label tempLabel;
     public Button søg;
     public Button run;
-    public TextField cpr;
     public Button loader;
+    public TextField cpr;
+    public TextArea dataOutput;
 
     public void temp(ActionEvent actionEvent) {
         System.out.println("du trykkede på knappen");
@@ -37,14 +37,15 @@ public class TempGUIController implements TempListener {
 
         Platform.runLater(new Runnable() {
             public void run() {
-                String text = tempLabel.getText();
-                text += "New Data! Temp:" + tempDTO.getTemp() + " °C" +tempDTO.getTime()+ "\r\n";
-                tempLabel.setText(text);
+                String text = dataOutput.getText();
+                text += "New Data! Temp:" + tempDTO.getTemp() + " °C " + ",Time: " + tempDTO.getTime() + "\r\n";
+                dataOutput.setText(text);
             }
         });
         TempDTO saveDTO = new TempDTO();
         saveDTO.setCpr(cpr.getText());
         saveDTO.setTemp(tempDTO.getTemp());
+        saveDTO.setTime(tempDTO.getTime());
         tempDAO.save(saveDTO);
         tempDAO.save(new TempDTO());
     }

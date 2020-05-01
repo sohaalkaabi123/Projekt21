@@ -66,11 +66,10 @@
                 </Menu>
             </items>
         </SplitMenuButton>
-        <Button fx:id="run" layoutX="17.0" layoutY="420.0" mnemonicParsing="false" onAction="#temp" prefHeight="36.0" prefWidth="79.0" text="Run" />
+        <Button fx:id="run" layoutX="22.0" layoutY="425.0" mnemonicParsing="false" onAction="#temp" prefHeight="36.0" prefWidth="79.0" text="Run" />
       <Button fx:id="søg" layoutX="250.0" layoutY="150.0" mnemonicParsing="false" text="Søg" />
       <TextField fx:id="cpr" layoutX="75.0" layoutY="150.0" promptText="cpr-nummer" />
-      <TextField layoutX="514.0" layoutY="310.0" prefHeight="110.0" prefWidth="149.0" promptText="Kommentar fra læge.." />
-      <Label fx:id="tempLabel" layoutX="110.0" layoutY="350.0" prefHeight="50.0" prefWidth="395.0" text="Temp" />
-      <Button fx:id="loader" layoutX="615.0" layoutY="425.0" mnemonicParsing="false" onAction="#next" text="Next" />
+      <Button fx:id="loader" layoutX="623.0" layoutY="425.0" mnemonicParsing="false" onAction="#next" text="Next" />
+      <TextArea fx:id="dataOutput" layoutX="23.0" layoutY="312.0" prefHeight="108.0" prefWidth="647.0" />
     </children>
 </AnchorPane>

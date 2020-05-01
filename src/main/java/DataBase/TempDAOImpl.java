@@ -6,25 +6,23 @@ import java.util.List;
 
 public class TempDAOImpl implements TempDAO {
 
-    Connection conn = Connector.getConn();
-
-    public String save(TempDTO tempDTO) {
+    public void save(TempDTO tempDTO) {
+        Connection conn = Connector.getConn();
         try {
             PreparedStatement statement = conn.prepareStatement("INSERT INTO Målinger (Cpr,Temp,Tid) VALUES (?,?,?) ");
-
             statement.setString(1, tempDTO.getCpr());
             statement.setDouble(2, tempDTO.getTemp());
             statement.setTimestamp(3, tempDTO.getTime());
-            System.out.println("okay!!");
             statement.execute();
+            System.out.println("save is done!!");
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return null;
     }
 
     public List<TempDTO> load(String cpr) {
         List<TempDTO> data = new ArrayList<TempDTO>();
+        Connection conn = Connector.getConn();
         try {
             PreparedStatement preparedStatement = conn.prepareStatement("SELECT * FROM Målinger WHERE Cpr = ? ");
             preparedStatement.setString(1, cpr);

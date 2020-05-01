@@ -31,10 +31,10 @@ public class LoaderGUIController {
         List<TempDTO> tempData = tempDAO.load(cpr);
         String text = "";
         for (TempDTO data : tempData) {
-            text += "Cpr: " + data.getCpr() + ", Temperature: " + data.getTemp() + " °C" +", Tid: "+data.getTime() +"\r\n";
+            text += "Cpr: " + data.getCpr() + ", Temperature: " + data.getTemp() + " °C" + ", Time: " + data.getTime() + "\r\n";
         }
         målinger.setText(text);
-        System.out.println("Virker!!");
+        System.out.println("Load is done!!");
     }
 
     public void Back(ActionEvent actionEvent) throws IOException {
