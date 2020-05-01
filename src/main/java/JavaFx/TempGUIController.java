@@ -6,8 +6,16 @@ import DataBase.TempDTO;
 import Sampler.*;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
+import javafx.stage.Stage;
+
+import java.io.IOException;
 
 public class TempGUIController implements TempListener {
 
@@ -15,6 +23,8 @@ public class TempGUIController implements TempListener {
     public Label tempLabel;
     public Button søg;
     public Button run;
+    public TextField cpr;
+    public Button loader;
 
     public void temp(ActionEvent actionEvent) {
         System.out.println("du trykkede på knappen");
@@ -23,17 +33,27 @@ public class TempGUIController implements TempListener {
         generator.registerObserver(this);
     }
 
-    public void notify(final double temp) {
-        tempDAO.save(new TempDTO());
+    public void notify(final TempDTO tempDTO) {
+
         Platform.runLater(new Runnable() {
             public void run() {
-                tempLabel.setText(String.valueOf(temp));
+                String text = tempLabel.getText();
+                text += "New Data! Temp:" + tempDTO.getTemp() + " °C" +tempDTO.getTime()+ "\r\n";
+                tempLabel.setText(text);
             }
         });
-
+        TempDTO saveDTO = new TempDTO();
+        saveDTO.setCpr(cpr.getText());
+        saveDTO.setTemp(tempDTO.getTemp());
+        tempDAO.save(saveDTO);
+        tempDAO.save(new TempDTO());
     }
 
-    public void search(ActionEvent actionEvent) {
-
+    public void next(ActionEvent actionEvent) throws IOException {
+        Parent secondPaneLoader = FXMLLoader.load(getClass().getResource("/loader.fxml"));
+        Scene secondScene = new Scene(secondPaneLoader);
+        Stage primaryStage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+        primaryStage.setScene(secondScene);
+        primaryStage.show();
     }
 }

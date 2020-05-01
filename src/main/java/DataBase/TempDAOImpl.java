@@ -1,6 +1,8 @@
 package DataBase;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class TempDAOImpl implements TempDAO {
 
@@ -8,8 +10,11 @@ public class TempDAOImpl implements TempDAO {
 
     public String save(TempDTO tempDTO) {
         try {
-            PreparedStatement statement = conn.prepareStatement("INSERT INTO Patienter (Temperatur) VALUES (?) ");
-            statement.setDouble(1, tempDTO.getTemp());
+            PreparedStatement statement = conn.prepareStatement("INSERT INTO Målinger (Cpr,Temp,Tid) VALUES (?,?,?) ");
+
+            statement.setString(1, tempDTO.getCpr());
+            statement.setDouble(2, tempDTO.getTemp());
+            statement.setTimestamp(3, tempDTO.getTime());
             System.out.println("okay!!");
             statement.execute();
         } catch (Exception e) {
@@ -18,18 +23,22 @@ public class TempDAOImpl implements TempDAO {
         return null;
     }
 
-    public TempDTO load(TempDTO tempDTO) {
+    public List<TempDTO> load(String cpr) {
+        List<TempDTO> data = new ArrayList<TempDTO>();
         try {
-            Statement statement = conn.createStatement();
-            ResultSet show_tabels = statement.executeQuery("SELECT Temperatur FROM Patienter");
-            TempDTO TempDTO = new TempDTO();
-            while (show_tabels.next()) {
-                TempDTO.setTemp(show_tabels.getDouble("Temperatur"));
+            PreparedStatement preparedStatement = conn.prepareStatement("SELECT * FROM Målinger WHERE Cpr = ? ");
+            preparedStatement.setString(1, cpr);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                TempDTO tempDTO = new TempDTO();
+                tempDTO.setCpr(resultSet.getString("Cpr"));
+                tempDTO.setTemp(resultSet.getDouble("Temp"));
+                tempDTO.setTime(resultSet.getTimestamp("Tid"));
+                data.add(tempDTO);
             }
-            return TempDTO;
-        } catch (Exception e) {
+        } catch (SQLException e) {
             e.printStackTrace();
         }
-        return null;
+        return data;
     }
 }

@@ -1,5 +1,7 @@
 package Sampler;
 
+import DataBase.TempDTO;
+
 public interface TempListener {
-    void notify(double temp);
+    void notify(TempDTO tempDTO);
 }

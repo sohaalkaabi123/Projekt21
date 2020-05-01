@@ -1,19 +1,12 @@
 package DataBase;
 
+import java.sql.Timestamp;
+
 public class TempDTO {
 
     private String Cpr;
     private double temp;
-    private String time;
-
-    public TempDTO() {
-
-    }
-
-    public TempDTO(double temp, String time) {
-        this.temp = temp;
-        this.time = time;
-    }
+    private Timestamp time;
 
     public String getCpr() {
         return Cpr;
@@ -31,11 +24,11 @@ public class TempDTO {
         this.temp = temp;
     }
 
-    public String getTime() {
+    public Timestamp getTime() {
         return time;
     }
 
-    public void setTime(String time) {
+    public void setTime(Timestamp time) {
         this.time = time;
     }
 }

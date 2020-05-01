@@ -1,6 +1,9 @@
 package Sampler;
 
+import DataBase.TempDTO;
 import JavaFx.*;
+
+import java.sql.Timestamp;
 
 public class TempGenerator implements TempSampler, Runnable {
 
@@ -9,6 +12,7 @@ public class TempGenerator implements TempSampler, Runnable {
     public void run() {
         while (true) {
             try {
+                TempDTO tempDTO = new TempDTO();
                 Thread.sleep(10000);
 
                 int max = 200;
@@ -16,8 +20,10 @@ public class TempGenerator implements TempSampler, Runnable {
                 double value = (Math.random() * ((max - min) + 1) + min);
 
                 double temperatur = (value * 4 / 50) + 24;
+                tempDTO.setTemp(temperatur);
+                tempDTO.setTime(new Timestamp(System.currentTimeMillis()));
                 if (observer != null) {
-                    observer.notify(temperatur);
+                    observer.notify(tempDTO);
                 }
             } catch (InterruptedException e) {
                 e.printStackTrace();
