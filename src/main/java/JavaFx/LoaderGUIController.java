@@ -20,20 +20,20 @@ import java.util.List;
 public class LoaderGUIController {
 
 
-    public TextField Felt;
+    public TextField Felt;//Reference til Controls fra FXML-filen
     public Button Søg;
     public TextArea målinger;
     public Button tilbage;
 
-    public void loadData(ActionEvent actionEvent) {
-        String cpr = Felt.getText();
-        TempDAO tempDAO = new TempDAOImpl();
-        List<TempDTO> tempData = tempDAO.load(cpr);
-        String text = "";
-        for (TempDTO data : tempData) {
+    public void loadData(ActionEvent actionEvent) { //Event Driven, dvs. her trykkes ved en knap
+        String cpr = Felt.getText(); //Der laves en variabel og tildeles værdien fra TextArea
+        TempDAO tempDAO = new TempDAOImpl(); //Ny objekt af klassen TempDAOImpl
+        List<TempDTO> tempData = tempDAO.load(cpr);//List TempDTO der indeholder TempDTO udfyldes af Resultset fra load
+        String text = ""; //Der laves en variabel af typen streng
+        for (TempDTO data : tempData) { //for hvert element i listen tempData tilføjes elements data til stringen text
             text += "Cpr: " + data.getCpr() + ", Temperature: " + data.getTemp() + " °C" + ", Time: " + data.getTime() + "\r\n";
         }
-        målinger.setText(text);
+        målinger.setText(text);//målingerne vises i TextArea
         System.out.println("Load is done!!");
     }
 
